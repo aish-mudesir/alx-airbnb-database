@@ -56,3 +56,21 @@ Partitioning is especially useful when:
 - Most queries **filter by date ranges**.
 
 ---
+
+-- Before indexing
+EXPLAIN ANALYZE
+SELECT b.booking_id, b.booking_date, u.user_name, p.property_name
+FROM bookings b
+INNER JOIN users u ON b.user_id = u.user_id
+INNER JOIN properties p ON b.property_id = p.property_id
+WHERE b.booking_date BETWEEN '2025-02-01' AND '2025-02-28'
+ORDER BY b.booking_date DESC;
+
+-- After indexing
+EXPLAIN ANALYZE
+SELECT b.booking_id, b.booking_date, u.user_name, p.property_name
+FROM bookings b
+INNER JOIN users u ON b.user_id = u.user_id
+INNER JOIN properties p ON b.property_id = p.property_id
+WHERE b.booking_date BETWEEN '2025-02-01' AND '2025-02-28'
+ORDER BY b.booking_date DESC;
