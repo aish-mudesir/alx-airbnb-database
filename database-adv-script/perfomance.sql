@@ -1,4 +1,3 @@
-EXPLAIN ANALYZE
 SELECT 
     b.booking_id,
     b.booking_date,
